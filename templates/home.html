@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Winter_Project</title>
+
+    <script>
+        window.onload = function() {
+            document.getElementById("1").onclick = function (){
+                document.getElementById("data").setAttribute('value', '1')
+            }
+
+            document.getElementById("2").onclick = function (){
+                document.getElementById("data").setAttribute('value', '2')
+            }
+
+            document.getElementById("3").onclick = function (){
+                document.getElementById("data").setAttribute('value', '3')
+            }
+        };
+    </script>
+
+</head>
+<body>
+<h1>한식이 먹고 싶니?</h1>
+
+<form action = "/post" method = "post">
+         <button type = "submit" id = "1" name = "1" value = "very">완전</button>
+    <br> <button type = "submit" id = "2" name = "2" value = "soso">글쎄</button>
+    <br> <button type = "submit" id = "3" name = "3" value = "nope">별로</button>
+    <input type = "hidden" id = "data" name = "data">
+
+</form>
+
+</body>
+</html>
