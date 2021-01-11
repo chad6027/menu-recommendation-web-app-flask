@@ -3,36 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>대답해</title>
-        <script>
-        window.onload = function() {
-            document.getElementById("1").onclick = function (){
-                document.getElementById("data").setAttribute('value', '1')
-            }
-
-            document.getElementById("2").onclick = function (){
-                document.getElementById("data").setAttribute('value', '2')
-            }
-
-            document.getElementById("3").onclick = function (){
-                document.getElementById("data").setAttribute('value', '3')
-            }
-        };
-    </script>
+        <script type="text/javascript">
+        function setValue(val){
+            document.getElementById("data").setAttribute('value', val)
+        }
+        </script>
 </head>
 <body>
 <h1>{{ question }}</h1>
-
+<form action = "/post" method = "post">
 {% for choice in choices %}
-    <button type = "submit" id = "{{ loop.index }}" name = "{{loop.index}}"> {{ choice }} </button>
+    <button type = "submit" id = "{{ loop.index }}" name = "{{loop.index}}" onclick = "setValue(this.value)"> {{ choice }} </button>
     <br>
 {% endfor %}
+    <input type = "hidden" id = "data" name = "data">
+</form>
 
-{#<form action = "/post" method = "post">#}
-{#         <button type = "submit" id = "1" name = "1" value = "very">완전</button>#}
-{#    <br> <button type = "submit" id = "2" name = "2" value = "soso">글쎄</button>#}
-{#    <br> <button type = "submit" id = "3" name = "3" value = "nope">별로</button>#}
-{#    <input type = "hidden" id = "data" name = "data">#}
-{#</form>#}
 
 </body>
 </html>
