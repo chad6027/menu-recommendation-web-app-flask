@@ -13,7 +13,6 @@ qt = [
     '누구랑 먹어?',
     '술은? 안드시게? 이걸 참아?'
 ]
-choice = {'Korean': ['O', 'X'], 'Diet': ['O', 'X'], 'Spicy': ['O', 'X'], 'Partner': ['X', '혼자', '애인', ' 그외'], 'Alcohol': ['X', '맥주', '소주']}
 schema = []
 ans = []
 
@@ -47,10 +46,8 @@ def hello_world():
 
 @app.route('/question')
 def question():
-    global cur_qt
-    cur_qt = cur_qt + 1
-    if cur_qt < choice.__sizeof__():
-        return render_template('question.html', question=qt[cur_qt], choices=choice[schema[cur_qt]])
+    if cur_qt < 5:
+        return render_template('question.html', question=qt[cur_qt])
     else:
         return redirect(url_for('result'))
 
@@ -59,10 +56,9 @@ def question():
 def post():
     global cur_qt, ans
     cur_qt = cur_qt + 1
-    print(cur_qt)
     if request.method == 'POST':
         print(request.form["data"])
-        ans.append(request.form['data'])
+        ans.append(request.form["data"])
         return redirect(url_for('question'))
     else:
         return render_template('home.html')
@@ -70,20 +66,7 @@ def post():
 
 @app.route('/result', methods=['POST'])
 def result():
-    sql = "SELECT Menu FROM dish WHERE "
-    for i in range(0, ans.__sizeof__() - 1):
-        sql = sql + schema[i] + " = " + ans[i] + " and "
-    sql.removesuffix('end')
-    menu = c.execute(sql)
-    if menu.__sizeof__() == 1:
-        return render_template('result.html', dish=menu.fetchone())
-    else:
-        repeat = random.random(0, menu.__sizeof__() - 1)
-        while repeat > 0:
-            menu.next()
-            repeat -= 1
-        return render_template('result.html', dish=menu.fetchone())
-
+# 호찬이가 제안한 Bayes 정리를 이용한 결과 처리 방식 도입 예정
 
 if __name__ == '__main__':
     app.run()

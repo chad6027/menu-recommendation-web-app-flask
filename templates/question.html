@@ -5,20 +5,19 @@
     <title>대답해</title>
         <script type="text/javascript">
         function setValue(val){
-            document.getElementById("data").setAttribute('value', val)
+            document.getElementById("data").setAttribute("value", val)
         }
         </script>
 </head>
 <body>
 <h1>{{ question }}</h1>
+
 <form action = "/post" method = "post">
-{% for choice in choices %}
-    <button type = "submit" id = "{{ loop.index }}" name = "{{loop.index}}" onclick = "setValue(this.value)"> {{ choice }} </button>
-    <br>
-{% endfor %}
+    <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>
+    <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>
+    <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>
     <input type = "hidden" id = "data" name = "data">
 </form>
-
 
 </body>
 </html>
