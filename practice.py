@@ -1,6 +1,6 @@
-import random
+import os
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
 conn = sqlite3.connect('2020.db')
@@ -15,6 +15,9 @@ qt = [
 ]
 schema = []
 ans = []
+
+# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = os.urandom(16)
 
 
 def countQt():
@@ -39,6 +42,7 @@ getSchema()
 
 @app.route('/')
 def hello_world():
+    # newConnector =
     global cur_qt
     cur_qt = 0
     return render_template('home.html')
@@ -64,8 +68,8 @@ def post():
         return render_template('home.html')
 
 
-@app.route('/result', methods=['POST'])
-def result():
+# @app.route('/result', methods=['POST'])
+# def result():
 # 호찬이가 제안한 Bayes 정리를 이용한 결과 처리 방식 도입 예정
 
 if __name__ == '__main__':
