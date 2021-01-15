@@ -20,11 +20,6 @@ ans = []
 app.secret_key = os.urandom(16)
 
 
-def countQt():
-    global cur_qt
-    cur_qt += 1
-
-
 def getSchema():
     global schema
 
@@ -71,6 +66,7 @@ def post():
 # @app.route('/result', methods=['POST'])
 # def result():
 # 호찬이가 제안한 Bayes 정리를 이용한 결과 처리 방식 도입 예정
+
 
 if __name__ == '__main__':
     app.run()
