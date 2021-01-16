@@ -1,8 +1,17 @@
 import os
 import sqlite3
+import mysql.connector
+from modules import db
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
+
+test_db = db.Database()
+
+data = test_db.executeAll("SELECT * FROM food;")
+print(data)
+
+
 conn = sqlite3.connect('2020.db')
 c = conn.cursor()
 cur_qt = 0
@@ -47,8 +56,6 @@ def hello_world():
 def question():
     if cur_qt < 5:
         return render_template('question.html', question=qt[cur_qt])
-    else:
-        return redirect(url_for('result'))
 
 
 @app.route('/post', methods=['POST'])
