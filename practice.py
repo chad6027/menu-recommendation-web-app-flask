@@ -1,6 +1,7 @@
 import os
 import sqlite3
-import mysql.connector
+import string
+import random
 from modules import db
 from flask import Flask, render_template, request, redirect, url_for, session
 
@@ -29,19 +30,15 @@ ans = []
 app.secret_key = os.urandom(16)
 
 
-def getSchema():
-    global schema
+def get_random_key():
+    sample_str = ''.join((random.choice(string.ascii_letters) for i in range(5)))
+    sample_str += ''.join((random.choice(string.digits) for i in range(5)))
 
-    data = c.execute("PRAGMA table_info('dish')")
-    for i in data:
-        print(i)
-        schema.append(i[1])
-
-    data = c.execute("SELECT * FROM dish")
-    print(c.fetchall())
-
-
-getSchema()
+    # Convert string to list and shuffle it to mix letters and digits
+    sample_list = list(sample_str)
+    random.shuffle(sample_list)
+    final_string = ''.join(sample_list)
+    return final_string
 
 
 @app.route('/')
@@ -49,6 +46,15 @@ def hello_world():
     # newConnector =
     global cur_qt
     cur_qt = 0
+    return render_template('home.html')
+
+
+@app.route('/play')
+def hello_world():
+    new_session = get_random_key()
+    while new_session in session:
+        new_session = get_random_key()
+    session[new_session] = 'which data is gonna be here'
     return render_template('home.html')
 
 
