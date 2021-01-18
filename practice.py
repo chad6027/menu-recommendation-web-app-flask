@@ -9,10 +9,6 @@ app = Flask(__name__)
 
 test_db = db.Database()
 
-data = test_db.executeAll("SELECT * FROM food;")
-print(data)
-
-
 conn = sqlite3.connect('2020.db')
 c = conn.cursor()
 cur_qt = 0
@@ -50,17 +46,23 @@ def hello_world():
 
 
 @app.route('/play')
-def hello_world():
+def play():
     new_session = get_random_key()
     while new_session in session:
         new_session = get_random_key()
-    session[new_session] = 'which data is gonna be here'
-    return render_template('home.html')
+    session[new_session] = 0
+
+    return new_session
 
 
 @app.route('/question')
 def question():
-    if cur_qt < 5:
+    global cur_qt
+    if request.method == 'POST':
+        print(request.form["data"])
+        ans.append(request.form["data"])
+        return redirect(url_for('question'))
+    else:
         return render_template('question.html', question=qt[cur_qt])
 
 
