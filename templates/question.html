@@ -14,11 +14,16 @@
 
 <div class="qna" name="qna">
     <form action = "/post" method = "post">
-        <h1>{{ question }}</h1>
-        <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>
-        <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>
-        <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>
-        <input type = "hidden" id = "data" name = "data">
+        <div class = "question">
+            <h1>{{ question }}</h1>
+        </div>
+        <div class="answer">
+            <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>
+            <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>
+            <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>
+            <input type = "hidden" id = "data" name = "data">
+            <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
+        </div>
     </form>
 </div>
 

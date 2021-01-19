@@ -7,8 +7,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
 
-test_db = db.Database()
-
+mysql = db.Database()
+dict_session_question = dict()
 conn = sqlite3.connect('2020.db')
 c = conn.cursor()
 cur_qt = 0
@@ -47,11 +47,20 @@ def hello_world():
 
 @app.route('/play')
 def play():
+    # generate session random key
     new_session = get_random_key()
     while new_session in session:
         new_session = get_random_key()
-    session[new_session] = 0
 
+    # session 안에 데이터로 음식들의 prior값을 넣으면 나중에 처리하기 쉬워질 것 같다.
+    session[new_session] = []
+
+    # random question order
+    rand_question = mysql.executeAll("select que_no from qna ORDER BY rand()")
+
+    # list 안에 dict 형태로 SELECT 결과가 저장되어있는 것을 value 만 갖고와서 따로 list 로 저장
+    rand_question = [value['que_no'] for value in rand_question]
+    dict_session_question[new_session] = rand_question
     return new_session
 
 

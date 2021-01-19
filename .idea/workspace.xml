@@ -4,6 +4,7 @@
     <list default="true" id="b8459a79-209d-4c08-86ed-6e880fb990b5" name="Default Changelist" comment="FrontEnd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +15,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -41,9 +42,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
-  </component>
   <component name="ProjectId" id="1mKarK6wXMd4MM8C3LAMPhAA93j" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -60,7 +58,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -70,7 +68,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chad2\PycharmProjects\2020WinterProject\static\js" />
       <recent name="C:\Users\chad2\PycharmProjects\2020WinterProject\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chad2\PycharmProjects\2020WinterProject\static\js" />
     </key>
   </component>
   <component name="RunManager" selected="Flask server.Flask (practice.py)">
@@ -108,7 +110,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -164,7 +166,16 @@
       <workItem from="1610291844567" duration="176000" />
       <workItem from="1610342965962" duration="6352000" />
       <workItem from="1610449497234" duration="452000" />
-      <workItem from="1610519607447" duration="2838000" />
+      <workItem from="1610519607447" duration="2891000" />
+      <workItem from="1610608989413" duration="2435000" />
+      <workItem from="1610626125005" duration="3970000" />
+      <workItem from="1610719297805" duration="742000" />
+      <workItem from="1610772650290" duration="9486000" />
+      <workItem from="1610807521212" duration="356000" />
+      <workItem from="1610866098942" duration="1949000" />
+      <workItem from="1610951742494" duration="5875000" />
+      <workItem from="1610980285982" duration="1947000" />
+      <workItem from="1611040118211" duration="7794000" />
     </task>
     <task id="LOCAL-00001" summary="gitignore">
       <created>1610177434199</created>
@@ -201,7 +212,49 @@
       <option name="project" value="LOCAL" />
       <updated>1610449940475</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="generate app.secret_key">
+      <created>1610522850134</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1610522850134</updated>
+    </task>
+    <task id="LOCAL-00007" summary="210114">
+      <created>1610626147263</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1610626147263</updated>
+    </task>
+    <task id="LOCAL-00008" summary="210115">
+      <created>1610719437116</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1610719437117</updated>
+    </task>
+    <task id="LOCAL-00009" summary="210116 - test">
+      <created>1610807544344</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1610807544344</updated>
+    </task>
+    <task id="LOCAL-00010" summary="session">
+      <created>1610868546314</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1610868546314</updated>
+    </task>
+    <task id="LOCAL-00011" summary="210118">
+      <created>1610980352025</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1610980352025</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,10 +279,16 @@
     <MESSAGE value="FrontEnd" />
     <MESSAGE value="210111" />
     <MESSAGE value="The number of Choices is fixed &amp;&amp; Result part reset" />
-    <option name="LAST_COMMIT_MESSAGE" value="The number of Choices is fixed &amp;&amp; Result part reset" />
+    <MESSAGE value="generate app.secret_key" />
+    <MESSAGE value="210114" />
+    <MESSAGE value="210115" />
+    <MESSAGE value="210116 - test" />
+    <MESSAGE value="session" />
+    <MESSAGE value="210118" />
+    <option name="LAST_COMMIT_MESSAGE" value="210118" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/2020WinterProject$Flask__practice_py_.coverage" NAME="Flask (practice.py) Coverage Results" MODIFIED="1610521624616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/2020WinterProject$Flask__practice_py_.coverage" NAME="Flask (practice.py) Coverage Results" MODIFIED="1611056194903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/2020WinterProject$Test1.coverage" NAME="Test1 Coverage Results" MODIFIED="1610271712380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Test1$Test1.coverage" NAME="Test1 Coverage Results" MODIFIED="1609735485731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/2020WinterProject$dbinit.coverage" NAME="dbinit Coverage Results" MODIFIED="1610265458778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
