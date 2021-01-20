@@ -2,28 +2,36 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+
     <title>대답해</title>
-        <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
-        <script type="text/javascript">
-        function setValue(val){
-            document.getElementById("data").setAttribute("value", val)
-        }
-        </script>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+
+    <script type="text/javascript">
+    function setValue(val){
+        document.getElementById("data").setAttribute("value", val)
+    }
+    $(document).ready(function() {
+        var q = "<h1>{{ question }}</h1>";
+        $(".question").append(q);
+    });
+    </script>
+
 </head>
 <body>
 
 <div class="qna" name="qna">
     <form action = "/post" method = "post">
         <div class = "question">
-            <h1>{{ question }}</h1>
+
         </div>
         <div class="answer">
             <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>
             <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>
             <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>
-            <input type = "hidden" id = "data" name = "data">
-            <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
         </div>
+        <input type = "hidden" id = "data" name = "data">
+        <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
     </form>
 </div>
 

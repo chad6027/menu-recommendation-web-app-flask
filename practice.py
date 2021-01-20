@@ -61,7 +61,7 @@ def play():
     # list 안에 dict 형태로 SELECT 결과가 저장되어있는 것을 value 만 갖고와서 따로 list 로 저장
     rand_question = [value['que_no'] for value in rand_question]
     dict_session_question[new_session] = rand_question
-    return new_session
+    return render_template('question.html', question=rand_question[0])
 
 
 @app.route('/question')
