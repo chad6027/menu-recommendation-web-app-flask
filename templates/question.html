@@ -15,20 +15,55 @@
         var q = "<h1>{{ question }}</h1>";
         $(".question").append(q);
     });
+
+
+    $(function() {
+        $("button").click(function () {
+
+            var s = document.getElementById("session_key").value
+            var d = $('#data').val()
+            var postdata = {'session': s, 'answer': d};
+
+
+            $.ajax({
+
+                type: 'POST',
+                url: '{{ url_for("ajax") }}',
+                data: JSON.stringify(postdata),
+                dataType: 'JSON',
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data.result)
+                    next_question = "<h1>" + data.result + "</h1>"
+                    $(".question").children().remove()
+                    $(".question").append(next_question)
+
+                },
+                error: function (request, status, error) {
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+        })
+    });
+
     </script>
 
 </head>
 <body>
 
 <div class="qna" name="qna">
-    <form action = "/post" method = "post">
-        <div class = "question">
+    <form>
+        <div class = "question" id = "question">
 
         </div>
         <div class="answer">
-            <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>
-            <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>
-            <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>
+{#            <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>#}
+{#            <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>#}
+{#            <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>#}
+            <button type = "button" id = "yes" name = "yes" value = "yes" > Yes </button>
+            <button type = "button" id = "no" name = "no" value = "no" > No </button>
+            <button type = "button" id = "soso" name = "soso" value = "soso"> soso </button>
         </div>
         <input type = "hidden" id = "data" name = "data">
         <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">

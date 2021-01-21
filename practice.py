@@ -3,7 +3,7 @@ import sqlite3
 import string
 import random
 from modules import db
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 
 app = Flask(__name__)
 
@@ -53,15 +53,17 @@ def play():
         new_session = get_random_key()
 
     # session 안에 데이터로 음식들의 prior값을 넣으면 나중에 처리하기 쉬워질 것 같다.
-    session[new_session] = []
+    session[new_session] = 1
 
     # random question order
     rand_question = mysql.executeAll("select que_no from qna ORDER BY rand()")
 
     # list 안에 dict 형태로 SELECT 결과가 저장되어있는 것을 value 만 갖고와서 따로 list 로 저장
     rand_question = [value['que_no'] for value in rand_question]
+    print(rand_question)
     dict_session_question[new_session] = rand_question
-    return render_template('question.html', question=rand_question[0])
+
+    return render_template('question.html', question=rand_question[0], key=new_session)
 
 
 @app.route('/question')
@@ -86,6 +88,19 @@ def post():
     else:
         return render_template('home.html')
 
+
+@app.route('/ajax', methods=['POST'])
+def ajax():
+    data = request.get_json()
+    print(data)
+    key = data['session']
+
+    next_idx = dict_session_question[key][session[key]]
+    session[key] += 1
+    query = "SELECT que FROM qna WHERE que_no = " + str(next_idx)
+    next_question = mysql.executeOne(query)
+
+    return jsonify(result=next_question['que'])
 
 # @app.route('/result', methods=['POST'])
 # def result():
