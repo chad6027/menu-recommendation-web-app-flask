@@ -8,25 +8,16 @@
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
 
     <script type="text/javascript">
-    function setValue(val){
-        document.getElementById("data").setAttribute("value", val)
-    }
-    $(document).ready(function() {
-        var q = "<h1>{{ question }}</h1>";
-        $(".question").append(q);
-    });
+        function setValue(val){
+            document.getElementById("data").setAttribute("value", val)
+        }
 
-
-    $(function() {
-        $("button").click(function () {
-
-            var s = document.getElementById("session_key").value
-            var d = $('#data').val()
-            var postdata = {'session': s, 'answer': d};
-
+        $(document).ready(function() {
+            var session = $('#session_key').val()
+            var data = $('#data').val()
+            var postdata = {'session': session, 'answer': data};
 
             $.ajax({
-
                 type: 'POST',
                 url: '{{ url_for("ajax") }}',
                 data: JSON.stringify(postdata),
@@ -34,18 +25,58 @@
                 contentType: "application/json",
                 success: function (data) {
                     console.log(data.result)
-                    next_question = "<h1>" + data.result + "</h1>"
+                    var next_question = "<h1>" + data.result + "</h1>"
                     $(".question").children().remove()
                     $(".question").append(next_question)
 
+                    var next_answer = data.answer;
+                    $(".answer").empty()
+                    for(var i = 0; i < next_answer.length;i++){
+                        var next_button = "<button type = 'button' id = '" + i + "' value = '" + i +"'>" + next_answer[i] + "</button>"
+                        console.log(next_button)
+                        $(".answer").append(next_button)
+                    }
                 },
                 error: function (request, status, error) {
                     alert('ajax 통신 실패')
                     alert(error);
                 }
             })
-        })
-    });
+        });
+
+        $(document).on('click', 'button', function () {
+
+            var session = $('#session_key').val()
+            var data = $('#data').val()
+            var postdata = {'session': session, 'answer': data};
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("ajax") }}',
+                data: JSON.stringify(postdata),
+                dataType: 'JSON',
+                contentType: "application/json",
+                success: function (data) {
+
+                    var next_question = "<h1>" + data.result + "</h1>"
+                    $(".question").children().remove()
+                    $(".question").append(next_question)
+
+                    var next_answer = data.answer;
+                    $(".answer").empty()
+                    for(var i = 0; i < next_answer.length;i++){
+                        var next_button = "<button type = 'button' id = '" + i + "' value = '" + i +"'>" + next_answer[i] + "</button>"
+                        console.log(next_button)
+                        $(".answer").append(next_button)
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+        });
+
 
     </script>
 
@@ -58,19 +89,14 @@
 
         </div>
         <div class="answer">
-{#            <button type = "submit" id = "yes" name = "yes" value = "yes" onclick = "setValue(this.value)"> Yes </button>#}
-{#            <button type = "submit" id = "no" name = "no" value = "no" onclick = "setValue(this.value)"> No </button>#}
-{#            <button type = "submit" id = "soso" name = "soso" value = "soso" onclick = "setValue(this.value)"> soso </button>#}
-            <button type = "button" id = "yes" name = "yes" value = "yes" > Yes </button>
-            <button type = "button" id = "no" name = "no" value = "no" > No </button>
-            <button type = "button" id = "soso" name = "soso" value = "soso"> soso </button>
+
         </div>
         <input type = "hidden" id = "data" name = "data">
         <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
     </form>
 </div>
 
-<div class="test_dvi">
+<div class="test_div">
     <p> Does it change?</p>
 </div>
 
