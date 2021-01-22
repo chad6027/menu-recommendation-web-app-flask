@@ -67,30 +67,6 @@ def play():
 
     return render_template('question.html', key=new_session)
 
-
-# @app.route('/question')
-# def question():
-#     global cur_qt
-#     if request.method == 'POST':
-#         print(request.form["data"])
-#         ans.append(request.form["data"])
-#         return redirect(url_for('question'))
-#     else:
-#         return render_template('question.html', question=qt[cur_qt])
-#
-#
-# @app.route('/post', methods=['POST'])
-# def post():
-#     global cur_qt, ans
-#     cur_qt = cur_qt + 1
-#     if request.method == 'POST':
-#         print(request.form["data"])
-#         ans.append(request.form["data"])
-#         return redirect(url_for('question'))
-#     else:
-#         return render_template('home.html')
-
-
 @app.route('/ajax', methods=['POST'])
 def ajax():
     data = request.get_json()
