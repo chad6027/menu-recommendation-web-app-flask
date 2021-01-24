@@ -1,5 +1,4 @@
 import os
-import sqlite3
 import string
 import random
 from modules import db
@@ -9,20 +8,6 @@ app = Flask(__name__)
 
 mysql = db.Database()
 dict_session_question = dict()
-conn = sqlite3.connect('2020.db')
-c = conn.cursor()
-cur_qt = 0
-qt = [
-    '한식 어때?',
-    '다이어트중이야?',
-    '매운게 끌려?',
-    '누구랑 먹어?',
-    '술은? 안드시게? 이걸 참아?'
-]
-schema = []
-ans = []
-
-# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.secret_key = os.urandom(16)
 
 
@@ -41,8 +26,6 @@ def get_random_key():
 def hello_world():
     # main 기능 X
     # newConnector =
-    global cur_qt
-    cur_qt = 0
     return render_template('home.html')
 
 
@@ -66,6 +49,7 @@ def play():
     dict_session_question[new_session] = rand_question
 
     return render_template('question.html', key=new_session)
+
 
 @app.route('/ajax', methods=['POST'])
 def ajax():
