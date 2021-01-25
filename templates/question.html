@@ -14,7 +14,7 @@
 
         $(document).ready(function() {
             var session = $('#session_key').val()
-            var data = $('#data').val()
+            var data = 0
             var postdata = {'session': session, 'answer': data};
 
             $.ajax({
@@ -32,7 +32,7 @@
                     var next_answer = data.answer;
                     $(".answer").empty()
                     for(var i = 0; i < next_answer.length;i++){
-                        var next_button = "<button type = 'button' id = '" + i + "' value = '" + i +"'>" + next_answer[i] + "</button>"
+                        var next_button = "<button type = 'button' id = '" + i + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button>"
                         console.log(next_button)
                         $(".answer").append(next_button)
                     }
@@ -47,9 +47,9 @@
         $(document).on('click', 'button', function () {
 
             var session = $('#session_key').val()
-            var data = $('#data').val()
+            var data = $(this).val()
             var postdata = {'session': session, 'answer': data};
-
+            console.log(data)
             $.ajax({
                 type: 'POST',
                 url: '{{ url_for("ajax") }}',
@@ -65,8 +65,7 @@
                     var next_answer = data.answer;
                     $(".answer").empty()
                     for(var i = 0; i < next_answer.length;i++){
-                        var next_button = "<button type = 'button' id = '" + i + "' value = '" + i +"'>" + next_answer[i] + "</button>"
-                        console.log(next_button)
+                        var next_button = "<button type = 'button' id = '" + i  + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button>"
                         $(".answer").append(next_button)
                     }
                 },
@@ -94,10 +93,6 @@
         <input type = "hidden" id = "data" name = "data">
         <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
     </form>
-</div>
-
-<div class="test_div">
-    <p> Does it change?</p>
 </div>
 
 </body>
