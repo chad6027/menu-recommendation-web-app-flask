@@ -8,14 +8,14 @@
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
 
     <script type="text/javascript">
-        function setValue(val){
-            document.getElementById("data").setAttribute("value", val)
-        }
+        var session_key = '{{ key }}'
 
+        {# Page가 처음 로딩될 때 실행되는 함수#}
+        {# html에 띄울 질문과 보기를 요청함#}
         $(document).ready(function() {
-            var session = $('#session_key').val()
-            var data = 0
-            var postdata = {'session': session, 'answer': data};
+
+            {# ajax로 보내는 answer가 0이라는 것은 질문과 보기만을 요청하는 것 #}
+            var postdata = {'session': session_key, 'answer': 0};
 
             $.ajax({
                 type: 'POST',
@@ -24,16 +24,21 @@
                 dataType: 'JSON',
                 contentType: "application/json",
                 success: function (data) {
-                    console.log(data.result)
+                    {# 질문과 보기를 갖고 오면 html에 동적으로 추가#}
+
                     var next_question = "<h1>" + data.result + "</h1>"
+                    {# class가 question인 요소의 children들 삭제 후 질문 추가 => 밑에 .empty()와 같은 효과#}
                     $(".question").children().remove()
                     $(".question").append(next_question)
 
+                    {# class가 answer인 요소의 children들 삭제 후 질문 추가#}
                     var next_answer = data.answer;
                     $(".answer").empty()
+
+                    {# data.answer에 들어있는 값들을 이용하여 Button을 추가 #}
                     for(var i = 0; i < next_answer.length;i++){
-                        var next_button = "<button type = 'button' id = '" + i + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button>"
-                        console.log(next_button)
+                        {# 호찬이가 DB 설계를 udo_v1부터 시작하여 "' value = 'udo_v" + (i + 1) +" 이런 코드가 필요해짐 #}
+                        var next_button = "<button type = 'button' id = '" + i + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button> <br>"
                         $(".answer").append(next_button)
                     }
                 },
@@ -44,12 +49,12 @@
             })
         });
 
+        {# Button들의 onclick함수를 동적으로 할당 #}
         $(document).on('click', 'button', function () {
-
-            var session = $('#session_key').val()
+            {# 이벤트가 수행되는 버튼의 value를 가져와서 answer로 전달 #}
             var data = $(this).val()
-            var postdata = {'session': session, 'answer': data};
-            console.log(data)
+            var postdata = {'session': session_key, 'answer': data};
+
             $.ajax({
                 type: 'POST',
                 url: '{{ url_for("ajax") }}',
@@ -58,6 +63,27 @@
                 contentType: "application/json",
                 success: function (data) {
 
+                    if(data.done == true){
+                        {# POST 방식으로 session key 값을 넘기기 위해 form 생성#}
+                        var form = document.createElement("form");
+                        form.setAttribute("charset", "UTF-8");
+                        form.setAttribute("method", "Post"); // Get 또는 Post 입력
+                        form.setAttribute("action", "/result");
+
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type", "hidden");
+                        hiddenField.setAttribute("name", "session_key");
+                        hiddenField.setAttribute("value", session_key);
+
+                        form.appendChild(hiddenField);
+                        document.body.appendChild(form);
+
+                        form.submit()
+                        {# /result로 넘어가고 이 함수는 끝 #}
+                        return;
+                    }
+
+
                     var next_question = "<h1>" + data.result + "</h1>"
                     $(".question").children().remove()
                     $(".question").append(next_question)
@@ -65,7 +91,7 @@
                     var next_answer = data.answer;
                     $(".answer").empty()
                     for(var i = 0; i < next_answer.length;i++){
-                        var next_button = "<button type = 'button' id = '" + i  + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button>"
+                        var next_button = "<button type = 'button' id = '" + i  + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button> <br>"
                         $(".answer").append(next_button)
                     }
                 },
@@ -87,11 +113,11 @@
         <div class = "question" id = "question">
 
         </div>
+
         <div class="answer">
 
         </div>
-        <input type = "hidden" id = "data" name = "data">
-        <input type = "hidden" id = "session_key" name = "session_key" value = "{{ key }}">
+
     </form>
 </div>
 

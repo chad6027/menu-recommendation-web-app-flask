@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>result page</title>
+    <script>
+        history.pushState(null, null, location.href);
+
+        function gohome(){
+            location.href = '/';
+        }
+
+         history.pushState(null, null, '');
+
+
+    </script>
 </head>
 <body>
 <h1>오늘은 {{ dish }} 가 어떠신가요 ? </h1>
+
+{% for key, value in results.items() %}
+    <h5>{{ key }} : {{ value }}</h5>
+{% endfor %}
+
+<button onclick = "gohome()"> 처음으로 </button>
+
 </body>
 </html>

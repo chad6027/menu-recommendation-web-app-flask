@@ -11,6 +11,7 @@ mysql = db.Database()
 app.secret_key = os.urandom(16)
 
 
+# 호찬이가 올려준 함수 임의로 사용가능하게 수정했음
 def updatePrior(prior, udo):  # bayes정리를 이용하여 사전확률을 갱신한다.
     up, down = 0, 0
     result = []  # 초기화해야 함수를 반복적으로 사용 가능
@@ -74,46 +75,89 @@ def play():
 
 @app.route('/ajax', methods=['POST'])
 def ajax():
+    # ajax 에서 보낸 데이터 받기
     data = request.get_json()
     session_key = data['session']
     ans = data['answer']
+
+    # html 에 띄워야 할 보기를 저장하는 리스트
     answer_list = list()
 
+    # session[]에 저장하는 값이 자료 구조라면 session.modified 를 내가 True 로 set 해줘야 안에 들어있는 값을 수정할 수 있다.
     session.modified = True
+    cur_idx = session[session_key]['question_order_cur']
+
+    # question_order_cur 업데이트
     session[session_key]['question_order_cur'] += 1
-    next_idx = session[session_key]['question_order_cur']
-    next_qna_idx = session[session_key]['question_order'][next_idx]
 
-    query = "SELECT * FROM qna WHERE que_no = " + str(next_qna_idx)
+    # 만약에 더 이상 질문이 없다면 바로 done=True 를 json 형태로 리턴
+    if cur_idx >= (len(session[session_key]['question_order'])):
+        return jsonify(done=True)
 
-    next_qna = mysql.executeOne(query)
+    # 데이터 베이스에서 질문과 보기 가져오기
+    cur_qna_idx = session[session_key]['question_order'][cur_idx]
+    query = "SELECT * FROM qna WHERE que_no = " + str(cur_qna_idx)
+
+    cur_qna = mysql.executeOne(query)
 
     #ans_v*가 null 이면 버튼 추가X
-    if next_qna['ans_v1'] is not None:
-        answer_list.append(next_qna['ans_v1'])
-    if next_qna['ans_v2'] is not None:
-        answer_list.append(next_qna['ans_v2'])
-    if next_qna['ans_v3'] is not None:
-        answer_list.append(next_qna['ans_v3'])
+    if cur_qna['ans_v1'] is not None:
+        answer_list.append(cur_qna['ans_v1'])
+    if cur_qna['ans_v2'] is not None:
+        answer_list.append(cur_qna['ans_v2'])
+    if cur_qna['ans_v3'] is not None:
+        answer_list.append(cur_qna['ans_v3'])
 
     print("Session requested : " + data['session'])
-    print("next idx : " + str(next_idx))
-    print(answer_list)
 
+    # javascript 쪽에서 받은 제대로 된 데이터가 있을 때만 prior 을 업데이트 해야하므로
+    # 그것을 구분하기 위해 ans 에 저장된 값이 0인지 확인
     if ans != 0:
-        table_name = next_qna['udo_name']
+        # 질문과 관련된 table의 이름 가져오기
+        table_name = cur_qna['udo_name']
+        # table에서 사용자가 보낸 값 (udo_v1 / udo_v2 / udo_v3)에 대응하는 확률 값 가져오기
         query = "SELECT " + ans + " FROM " + table_name
         udo = mysql.executeAll(query)
+        # 가져온 값들은
+        # { { 'udo_v1' : 0.8 }, { 'udo_v1' : 0.2 }, { 'udo_v1' : 0.8 } }
+        # 이런 dictionary 형태로 저장되어있기 때문에 다시 list 형태로 저장
         udo = [value[ans] for value in udo]
-
+        
+        # prior값들 업데이트
         session[session_key]['prior'] = updatePrior(session[session_key]['prior'], udo)
 
-    return jsonify(result=next_qna['que'], answer=answer_list)
+    return jsonify(result=cur_qna['que'], answer=answer_list, done=False)
 
 
-# @app.route('/result', methods=['POST'])
-# def result():
-# 호찬이가 제안한 Bayes 정리를 이용한 결과 처리 방식 도입 예정
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    # 호찬이가 제안한 Bayes 정리를 이용한 결과 처리
+    # POST로 넘어온 session key값 받기
+    session_key = request.form['session_key']
+
+    # 가장 높은 prior 값을 갖는 index 를 찾아 most_recommended_no에 저장
+    # 현재 같은 prior 값이 있으면 그냥 index가 가장 작은 음식의 이름이 나오도록 되어있음.
+    most_recommended_no = session[session_key]['prior'].index(max(session[session_key]['prior'])) + 1
+
+    # DB에서 most_recommended_no에 해당하는 음식의 이름 가져와 most_recommended_name에 저장
+    query = "SELECT food_name FROM food_prior WHERE food_no = " + str(most_recommended_no)
+    most_recommended_name = mysql.executeOne(query)
+    most_recommended_name = most_recommended_name['food_name']
+
+    # 이 부분은 호찬이와 윤석이의 이해를 돕기 위해 따로 코딩한 것이므로 생략 가능
+    # -------------------------------------------------------------------------------------
+    # 결과 확인
+    food_name = "SELECT food_name FROM food_prior"
+    food_name = mysql.executeAll(food_name)
+    food_name = [value['food_name'] for value in food_name]
+
+    _result = {name: value for name, value in zip(food_name, session[session_key]['prior'])}
+
+    for index, value in enumerate(session[session_key]['prior']):
+        print(str(index + 1) + ". " + food_name[index] + " - " + str(value))
+    # --------------------------------------------------------------------------------------
+
+    return render_template('result.html', dish=most_recommended_name, results=_result)
 
 
 if __name__ == '__main__':
