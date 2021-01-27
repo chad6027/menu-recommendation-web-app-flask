@@ -137,6 +137,7 @@ def result():
 
     # 가장 높은 prior 값을 갖는 index 를 찾아 most_recommended_no에 저장
     # 현재 같은 prior 값이 있으면 그냥 index가 가장 작은 음식의 이름이 나오도록 되어있음.
+    # 같은 값이 있으면 랜덤하게?
     most_recommended_no = session[session_key]['prior'].index(max(session[session_key]['prior'])) + 1
 
     # DB에서 most_recommended_no에 해당하는 음식의 이름 가져와 most_recommended_name에 저장

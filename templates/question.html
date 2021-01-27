@@ -37,7 +37,7 @@
 
                     {# data.answer에 들어있는 값들을 이용하여 Button을 추가 #}
                     for(var i = 0; i < next_answer.length;i++){
-                        {# 호찬이가 DB 설계를 udo_v1부터 시작하여 "' value = 'udo_v" + (i + 1) +" 이런 코드가 필요해짐 #}
+                        {# 호찬이가 DB 설계를 udo_v1부터 시작하여 "' value = 'udo_v" + (i + 1) +"'>" 이런 코드가 필요해짐 #}
                         var next_button = "<button type = 'button' id = '" + i + "' value = 'udo_v" + (i + 1) +"'>" + next_answer[i] + "</button> <br>"
                         $(".answer").append(next_button)
                     }
