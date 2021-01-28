@@ -65,7 +65,7 @@ def play():
     session[new_session]['question_order_cur'] = 0
     session[new_session]['question_order'] = rand_question
 
-    #사전 확률 구해서 저장
+    # 사전 확률 구해서 저장
     prior_probability = mysql.executeAll("SELECT prior FROM food_prior")
     prior_probability = [value['prior'] for value in prior_probability]
     session[new_session]['prior'] = prior_probability
@@ -100,7 +100,7 @@ def ajax():
 
     cur_qna = mysql.executeOne(query)
 
-    #ans_v*가 null 이면 버튼 추가X
+    # ans_v*가 null 이면 버튼 추가X
     if cur_qna['ans_v1'] is not None:
         answer_list.append(cur_qna['ans_v1'])
     if cur_qna['ans_v2'] is not None:
