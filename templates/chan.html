@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+
+    <style>
+        /* 모바일에 적용될 스타일을 먼저 작성. */
+        /* 데모 특정 스타일 */
+        body {
+            background-color: white;
+            background-image: url(https://subtlepatterns.com/patterns/purty_wood.png);
+            background-position: center top;
+            background-repeat: repeat;
+            margin: 0 auto;
+            padding: 1em 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 150px auto 150px;
+            grid-gap: 1em;
+        }
+
+        header,
+        aside,
+        article,
+        footer {
+            background: #eaeaea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 15vh;
+        }
+
+        header,
+        footer,
+        aside,
+        article {
+            grid-column: 1 / 4;
+        }
+
+
+        @media all and (min-width: 896px) {
+
+            /* 데스크탑에서 사용될 스타일을 여기에 작성. */
+            aside,
+            article {
+                grid-column: auto;
+            }
+        }
+
+        /*아래 말풍선 관련 */
+        .box1 {
+            width: 300px;
+            margin: 50px auto;
+            border: 4px solid #ffb549;
+            padding: 20px;
+            text-align: center;
+            font-weight: 900;
+            color: #ffb549;
+            font-family: arial;
+            position: relative;
+        }
+
+        .sb7:before {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid #ffb549;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ffb549;
+            border-bottom: 10px solid transparent;
+            left: 20px;
+            bottom: -23px;
+        }
+
+        .sb7:after {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid #fff;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
+            border-bottom: 10px solid transparent;
+            left: 24px;
+            bottom: -13px;
+        }
+
+        /* 위에 말풍선 관련 */
+        .signboard {
+    width: 200px;
+    height: 230px;
+    position: relative;
+    animation: swinging 1.5s ease-in-out infinite alternate;
+    transform-origin: 200px 13px;
+}
+
+.sign {
+    width: 100%;
+    height: 200px;
+    background: burlywood;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+    font-size: 45px;
+    color: saddlebrown;
+    text-align: center;
+    line-height: 200px;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3), 0 -2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.strings {
+    width: 70px;
+    height: 70px;
+    border: 5px solid brown;
+    position: absolute;
+    border-right: none;
+    border-bottom: none;
+    transform: rotate(45deg);
+    top: 25px;
+    left: 160px;
+}
+.pin {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.pin.top {
+	background: gray;
+	left: 187px;
+}
+
+.pin.left, .pin.right {
+    background: brown;
+    top: 50px;
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pin.left {
+    left: 140px;
+}
+.pin.right {
+    right: -55px;
+}
+
+@keyframes swinging {
+	from {
+		transform: rotate(10deg);
+	}
+
+	to {
+		transform: rotate(-10deg);
+	}
+}
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+
+        <header style="opacity: 0.2;">
+            Header
+        </header>
+
+        <aside class="sidebar-left">
+            Left Sidebar
+        </aside>
+        <article class="main"
+            style="background-color: rgba( 255, 255, 255, 0.5 ); height: 600px;width: 1000px;margin-left: 150px;margin-right: 150px; margin: auto;">
+
+            <div>
+                <div class="box1 sb7" style="background:white;top: 150px;right: 100px;">
+                    <div style="font-size: large; color: black;">
+                        <p>음식 추천해 드립니다</p>
+                        <p>저에게 물어보세요!!</p>
+                    </div>
+                </div>
+                <div class="signboard" style="left: 380px; bottom: 50px;">
+                    <div class="sign" style="
+                    margin-bottom: 0px;
+                    border-bottom-width: 10px;
+                    height: 150px;
+                    width: 230px;
+                    left: 70px;
+                    bottom: 40px;
+                ">샌드위치</div>
+                    <div class="strings"></div>
+                    <div class="pin top"></div>
+                    <div class="pin left"></div>
+                    <div class="pin right"></div>
+                  </div>
+            <img alt="요리사" style="max-width: 350px;height: auto;position: relative;right: 300px;top:  -110px;"
+                src="../static/image/cook_main.jpg">
+    </div>
+    </article>
+    <aside class="sidebar-right">
+        Right Sidebar
+    </aside>
+
+    <footer>
+        Footer
+    </footer>
+    </div>
+
+</body>
+
+</html>

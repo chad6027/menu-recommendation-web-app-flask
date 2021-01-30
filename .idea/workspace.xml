@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8459a79-209d-4c08-86ed-6e880fb990b5" name="Default Changelist" comment="FrontEnd">
+      <change afterPath="$PROJECT_DIR$/flask_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -175,7 +174,19 @@
       <workItem from="1610866098942" duration="1949000" />
       <workItem from="1610951742494" duration="5875000" />
       <workItem from="1610980285982" duration="1947000" />
-      <workItem from="1611040118211" duration="7794000" />
+      <workItem from="1611040118211" duration="8489000" />
+      <workItem from="1611119397303" duration="6925000" />
+      <workItem from="1611226505723" duration="7323000" />
+      <workItem from="1611295604584" duration="13667000" />
+      <workItem from="1611472338872" duration="3728000" />
+      <workItem from="1611544590177" duration="4432000" />
+      <workItem from="1611554377941" duration="17537000" />
+      <workItem from="1611640627550" duration="10506000" />
+      <workItem from="1611745244967" duration="5254000" />
+      <workItem from="1611815145485" duration="12669000" />
+      <workItem from="1611903891399" duration="1823000" />
+      <workItem from="1611992881829" duration="13000" />
+      <workItem from="1611992920930" duration="1815000" />
     </task>
     <task id="LOCAL-00001" summary="gitignore">
       <created>1610177434199</created>
@@ -254,7 +265,77 @@
       <option name="project" value="LOCAL" />
       <updated>1610980352025</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="210119">
+      <created>1611060279886</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1611060279886</updated>
+    </task>
+    <task id="LOCAL-00013" summary="210120">
+      <created>1611126944243</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1611126944243</updated>
+    </task>
+    <task id="LOCAL-00014" summary="frontEnd">
+      <created>1611234152677</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1611234152677</updated>
+    </task>
+    <task id="LOCAL-00015" summary="210122">
+      <created>1611318761079</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1611318761079</updated>
+    </task>
+    <task id="LOCAL-00016" summary="210123">
+      <created>1611332775254</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1611332775254</updated>
+    </task>
+    <task id="LOCAL-00017" summary="210124">
+      <created>1611491212077</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1611491212077</updated>
+    </task>
+    <task id="LOCAL-00018" summary="210125">
+      <created>1611581518516</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1611581518517</updated>
+    </task>
+    <task id="LOCAL-00019" summary="backend 100%">
+      <created>1611665607338</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1611665607338</updated>
+    </task>
+    <task id="LOCAL-00020" summary="210127">
+      <created>1611751556431</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1611751556431</updated>
+    </task>
+    <task id="LOCAL-00021" summary="210128">
+      <created>1611836208742</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1611836208742</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,10 +366,20 @@
     <MESSAGE value="210116 - test" />
     <MESSAGE value="session" />
     <MESSAGE value="210118" />
-    <option name="LAST_COMMIT_MESSAGE" value="210118" />
+    <MESSAGE value="210119" />
+    <MESSAGE value="210120" />
+    <MESSAGE value="frontEnd" />
+    <MESSAGE value="210122" />
+    <MESSAGE value="210123" />
+    <MESSAGE value="210124" />
+    <MESSAGE value="210125" />
+    <MESSAGE value="backend 100%" />
+    <MESSAGE value="210127" />
+    <MESSAGE value="210128" />
+    <option name="LAST_COMMIT_MESSAGE" value="210128" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/2020WinterProject$Flask__practice_py_.coverage" NAME="Flask (practice.py) Coverage Results" MODIFIED="1611056194903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/2020WinterProject$Flask__practice_py_.coverage" NAME="Flask (practice.py) Coverage Results" MODIFIED="1611664321611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/2020WinterProject$Test1.coverage" NAME="Test1 Coverage Results" MODIFIED="1610271712380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Test1$Test1.coverage" NAME="Test1 Coverage Results" MODIFIED="1609735485731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/2020WinterProject$dbinit.coverage" NAME="dbinit Coverage Results" MODIFIED="1610265458778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
