@@ -1,6 +1,7 @@
 import os
 import string
 import random
+from datetime import timedelta
 from modules import db
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 
@@ -37,6 +38,13 @@ def get_random_key():
     random.shuffle(sample_list)
     final_string = ''.join(sample_list)
     return final_string
+
+
+# 각 세션의 유효시간을 5분으로 설정해준다.
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 @app.route('/')
@@ -135,10 +143,17 @@ def result():
     # POST로 넘어온 session key값 받기
     session_key = request.form['session_key']
 
-    # 가장 높은 prior 값을 갖는 index 를 찾아 most_recommended_no에 저장
-    # 현재 같은 prior 값이 있으면 그냥 index가 가장 작은 음식의 이름이 나오도록 되어있음.
-    # 같은 값이 있으면 랜덤하게?
-    most_recommended_no = session[session_key]['prior'].index(max(session[session_key]['prior'])) + 1
+    # 가장 높은 prior 값을 찾아 저장
+    most_recommended_value = max(session[session_key]['prior'])
+    # 같은 prior 값을 갖는 index 들을 찾아 저장
+    most_recommended_no = [(index + 1) for index, value in enumerate(session[session_key]['prior']) if value == most_recommended_value]
+
+    # 만약 prior 의 max 값이 하나만 존재한다면
+    if len(most_recommended_no) == 1:
+        most_recommended_no = most_recommended_no[0]
+    # 둘 이상이 존재한다면, 랜덤으로 음식을 하나 뽑는다.
+    else:
+        most_recommended_no = most_recommended_no[random.randint(0, len(most_recommended_no))]
 
     # DB에서 most_recommended_no에 해당하는 음식의 이름 가져와 most_recommended_name에 저장
     query = "SELECT food_name FROM food_prior WHERE food_no = " + str(most_recommended_no)
@@ -157,6 +172,10 @@ def result():
     for index, value in enumerate(session[session_key]['prior']):
         print(str(index + 1) + ". " + food_name[index] + " - " + str(value))
     # --------------------------------------------------------------------------------------
+
+    # game 이 끝났으니 session 제거
+    session.pop(session_key, None)
+    print("Session[" + session_key + "] has been removed")
 
     return render_template('result.html', dish=most_recommended_name, results=_result)
 
