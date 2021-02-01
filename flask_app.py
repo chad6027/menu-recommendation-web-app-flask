@@ -98,6 +98,27 @@ def ajax():
     # question_order_cur 업데이트
     session[session_key]['question_order_cur'] += 1
 
+    # javascript 쪽에서 받은 제대로 된 데이터가 있을 때만 prior 을 업데이트 해야하므로
+    # 그것을 구분하기 위해 ans 에 저장된 값이 0인지 확인
+    if ans != 0:
+        pre_qna_idx = session[session_key]['question_order'][cur_idx - 1]
+        query = "SELECT udo_name FROM qna WHERE que_no = " + str(pre_qna_idx)
+        pre_qna = mysql.executeOne(query)
+        # 질문과 관련된 table의 이름 가져오기
+        table_name = pre_qna['udo_name']
+
+        # table에서 사용자가 보낸 값 (udo_v1 / udo_v2 / udo_v3 / udo_v4)에 대응하는 확률 값 가져오기
+        query = "SELECT " + ans + " FROM " + table_name
+        udo = mysql.executeAll(query)
+        # 가져온 값들은
+        # { { 'udo_v1' : 0.8 }, { 'udo_v1' : 0.2 }, { 'udo_v1' : 0.8 } }
+        # 이런 dictionary 형태로 저장되어있기 때문에 다시 list 형태로 저장
+        udo = [value[ans] for value in udo]
+
+        # prior값들 업데이트
+        session[session_key]['prior'] = updatePrior(session[session_key]['prior'], udo)
+
+
     # 만약에 더 이상 질문이 없다면 바로 done=True 를 json 형태로 리턴
     if cur_idx >= (len(session[session_key]['question_order'])):
         return jsonify(done=True)
@@ -115,24 +136,12 @@ def ajax():
         answer_list.append(cur_qna['ans_v2'])
     if cur_qna['ans_v3'] is not None:
         answer_list.append(cur_qna['ans_v3'])
+    if cur_qna['ans_v4'] is not None:
+        answer_list.append(cur_qna['ans_v4'])
 
     print("Session requested : " + data['session'])
 
-    # javascript 쪽에서 받은 제대로 된 데이터가 있을 때만 prior 을 업데이트 해야하므로
-    # 그것을 구분하기 위해 ans 에 저장된 값이 0인지 확인
-    if ans != 0:
-        # 질문과 관련된 table의 이름 가져오기
-        table_name = cur_qna['udo_name']
-        # table에서 사용자가 보낸 값 (udo_v1 / udo_v2 / udo_v3)에 대응하는 확률 값 가져오기
-        query = "SELECT " + ans + " FROM " + table_name
-        udo = mysql.executeAll(query)
-        # 가져온 값들은
-        # { { 'udo_v1' : 0.8 }, { 'udo_v1' : 0.2 }, { 'udo_v1' : 0.8 } }
-        # 이런 dictionary 형태로 저장되어있기 때문에 다시 list 형태로 저장
-        udo = [value[ans] for value in udo]
-        
-        # prior값들 업데이트
-        session[session_key]['prior'] = updatePrior(session[session_key]['prior'], udo)
+
 
     return jsonify(result=cur_qna['que'], answer=answer_list, done=False)
 
@@ -168,7 +177,7 @@ def result():
     food_name = [value['food_name'] for value in food_name]
 
     _result = {name: value for name, value in zip(food_name, session[session_key]['prior'])}
-
+    _result = sorted(_result.items(), reverse=True, key=lambda x : x[1])
     for index, value in enumerate(session[session_key]['prior']):
         print(str(index + 1) + ". " + food_name[index] + " - " + str(value))
     # --------------------------------------------------------------------------------------
