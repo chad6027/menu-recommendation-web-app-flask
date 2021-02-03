@@ -8,6 +8,8 @@ class Database():
                                   user='root',
                                   password='@dl2623879',
                                   db='project',
+                                  read_timeout=120,
+                                  connect_timeout=120,
                                   charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
 
@@ -26,3 +28,6 @@ class Database():
 
     def commit(self):
         self.db.commit()
+
+    def close(self):
+        self.db.close()

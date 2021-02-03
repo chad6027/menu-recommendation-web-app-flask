@@ -7,8 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 
 
 app = Flask(__name__)
-
-mysql = db.Database()
+mysql = dict()
 app.secret_key = os.urandom(16)
 
 
@@ -61,12 +60,14 @@ def play():
     while new_session in session:
         new_session = get_random_key()
 
-    # session 안에 데이터로 음식들의 prior값을 넣으면 나중에 처리하기 쉬워질 것 같다.
     session[new_session] = dict()
+    # db connection 주기
+    mysql[new_session] = db.Database()
+    # 현재 질문이 몇번 index 인지 = 'cur'
     session[new_session]['cur'] = 0
 
     # random question order
-    rand_question = mysql.executeAll("SELECT que_no FROM qna ORDER BY rand()")
+    rand_question = mysql[new_session].executeAll("SELECT que_no FROM qna ORDER BY rand()")
 
     # list 안에 dict 형태로 SELECT 결과가 저장되어있는 것을 value 만 갖고와서 따로 list 로 저장
     rand_question = [value['que_no'] for value in rand_question]
@@ -74,7 +75,7 @@ def play():
     session[new_session]['question_order'] = rand_question
 
     # 사전 확률 구해서 저장
-    prior_probability = mysql.executeAll("SELECT prior FROM food_prior")
+    prior_probability = mysql[new_session].executeAll("SELECT prior FROM food_prior")
     prior_probability = [value['prior'] for value in prior_probability]
     session[new_session]['prior'] = prior_probability
 
@@ -103,13 +104,13 @@ def ajax():
     if ans != 0:
         pre_qna_idx = session[session_key]['question_order'][cur_idx - 1]
         query = "SELECT udo_name FROM qna WHERE que_no = " + str(pre_qna_idx)
-        pre_qna = mysql.executeOne(query)
+        pre_qna = mysql[session_key].executeOne(query)
         # 질문과 관련된 table의 이름 가져오기
         table_name = pre_qna['udo_name']
 
         # table에서 사용자가 보낸 값 (udo_v1 / udo_v2 / udo_v3 / udo_v4)에 대응하는 확률 값 가져오기
         query = "SELECT " + ans + " FROM " + table_name
-        udo = mysql.executeAll(query)
+        udo = mysql[session_key].executeAll(query)
         # 가져온 값들은
         # { { 'udo_v1' : 0.8 }, { 'udo_v1' : 0.2 }, { 'udo_v1' : 0.8 } }
         # 이런 dictionary 형태로 저장되어있기 때문에 다시 list 형태로 저장
@@ -127,7 +128,7 @@ def ajax():
     cur_qna_idx = session[session_key]['question_order'][cur_idx]
     query = "SELECT * FROM qna WHERE que_no = " + str(cur_qna_idx)
 
-    cur_qna = mysql.executeOne(query)
+    cur_qna = mysql[session_key].executeOne(query)
 
     # ans_v*가 null 이면 버튼 추가X
     if cur_qna['ans_v1'] is not None:
@@ -140,8 +141,6 @@ def ajax():
         answer_list.append(cur_qna['ans_v4'])
 
     print("Session requested : " + data['session'])
-
-
 
     return jsonify(result=cur_qna['que'], answer=answer_list, done=False)
 
@@ -166,23 +165,24 @@ def result():
 
     # DB에서 most_recommended_no에 해당하는 음식의 이름 가져와 most_recommended_name에 저장
     query = "SELECT food_name FROM food_prior WHERE food_no = " + str(most_recommended_no)
-    most_recommended_name = mysql.executeOne(query)
+    most_recommended_name = mysql[session_key].executeOne(query)
     most_recommended_name = most_recommended_name['food_name']
 
     # 이 부분은 호찬이와 윤석이의 이해를 돕기 위해 따로 코딩한 것이므로 생략 가능
     # -------------------------------------------------------------------------------------
     # 결과 확인
     food_name = "SELECT food_name FROM food_prior"
-    food_name = mysql.executeAll(food_name)
+    food_name = mysql[session_key].executeAll(food_name)
     food_name = [value['food_name'] for value in food_name]
 
     _result = {name: value for name, value in zip(food_name, session[session_key]['prior'])}
-    _result = sorted(_result.items(), reverse=True, key=lambda x : x[1])
     for index, value in enumerate(session[session_key]['prior']):
         print(str(index + 1) + ". " + food_name[index] + " - " + str(value))
     # --------------------------------------------------------------------------------------
 
     # game 이 끝났으니 session 제거
+    mysql[session_key].close()
+    mysql.pop(session_key)
     session.pop(session_key, None)
     print("Session[" + session_key + "] has been removed")
 

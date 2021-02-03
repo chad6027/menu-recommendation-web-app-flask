@@ -1,0 +1,305 @@
+ /* 모바일에 적용될 스타일을 먼저 작성. */
+        /* 데모 특정 스타일 */
+        body {
+            background-color: white;
+            background-image: url(https://subtlepatterns.com/patterns/purty_wood.png);
+            background-position: center top;
+            background-repeat: repeat;
+            margin: 0 auto;
+            padding: 1em 0;
+        }
+        /*ㅜㅜㅜ아래 게임화면ㅜㅜㅜ */
+        .container{
+            background-color: rgba( 255, 255, 255, 0.5 ); 
+            height: 600px;
+            width: 1000px;
+            margin-left: 150px;
+            margin-right: 150px;
+            margin: auto; 
+             /* flex 정렬 */
+             display:flex;
+             flex-direction: column;
+             justify-content: flex-end;
+
+         
+        }
+        .container-1 {
+            /* background: red; */
+            width: 70%;
+            display: flex;
+            align-items: flex-end;
+        }
+        .container-2 {
+            /* background: blue; */
+            width: 1000px;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+        /*ㅗㅗㅗ위 게임화면ㅗㅗㅗ */
+
+        /*ㅜㅜㅜ 아래 시작 버튼ㅜㅜㅜ */
+        button {
+            position: relative;
+            /* display:block; */
+            height: 45px;
+            width: 150px;
+            margin: 10px 7px;
+            padding: 5px 5px;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: #383736;
+            border: 3px #383736 solid;
+            border-radius: 4px;
+            text-transform: uppercase;
+            outline: 0;
+            overflow:hidden;
+            background: white;
+            z-index: 1;
+            cursor: pointer;
+            transition:         0.08s ease-in;
+            -o-transition:      0.08s ease-in;
+            -ms-transition:     0.08s ease-in;
+            -moz-transition:    0.08s ease-in;
+            -webkit-transition: 0.08s ease-in;
+          }
+          .fill:hover {
+            color: whitesmoke;
+          }
+          
+          .fill:before {
+            content: "";
+            position: absolute;
+            background: #383736;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 100%;
+            z-index: -1;
+            -webkit-transition: top 0.09s ease-in;
+          }
+          
+          .fill:hover:before {
+            top: 0;
+          }
+          /*ㅗㅗ 위 시작 버튼ㅗㅗ */
+          /*ㅜㅜ 아래 답 버튼ㅜㅜ  */
+          .arrow{
+            text-align:left;
+            padding-left:17px;
+          }
+          
+          .arrow:before{
+            content:"✔";
+            position:absolute;
+            color:#383736;
+            left: 83%;
+            opacity: 0;
+            -webkit-transition: all 250ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+          }
+          
+          .arrow:hover:before{
+            left:84%;
+            opacity:1;
+          }
+          
+          .arrow:hover {
+            width:170px;
+          }
+        /* ㅗㅗㅗ위  답 버튼 ㅗㅗㅗ*/
+          
+
+        .grid {
+            display: grid;
+            grid-template-columns: 150px auto 150px;
+            grid-gap: 1em;
+        }
+
+        header,
+        aside,
+        article,
+        footer {
+            background: rgba( 255, 255, 255, 0.5) ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 15vh;
+        }
+        footer {
+                border-top-width: 3px;
+                border-top-style: solid;
+                border-top-color: white;
+        }
+
+        header,
+        footer,
+        aside,
+        article {
+            grid-column: 1 / 4;
+        }
+
+
+        @media all and (min-width: 896px) {
+
+            /* 데스크탑에서 사용될 스타일을 여기에 작성. */
+            aside,
+            article {
+                grid-column: auto;
+            }
+        }
+
+        /*아래 말풍선 관련 */
+        .box1 {
+            width: 300px;
+            margin: 20px auto;
+            border: 4px solid #4d4d4d;
+            padding: 20px;
+            text-align: center;
+            font-weight: 900;
+            color: #000000;
+            font-family: arial;
+            position: relative;
+            background-color: rgba( 255, 255, 255, 0.8 );
+        }
+
+        .sb7:before {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid #4d4d4d;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #4d4d4d;
+            border-bottom: 10px solid transparent;
+            left: 20px;
+            bottom: -23px;
+        }
+
+        .sb7:after {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-left: 10px solid rgba( 255, 255, 255, 0.9);
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba( 255, 255, 255, 0.9);
+            border-bottom: 10px solid transparent;
+            left: 24px;
+            bottom: -13px;
+        }
+
+        /* 위에 말풍선 관련 */
+
+        /* 아래 포스트잇 관련 */
+        .post-it {
+            display: table;
+            margin: 5em auto 0;  
+          }
+
+          .note { 
+            -webkit-box-shadow: #DDD 0px 1px 2px;
+              position: relative;
+              background-color: #F4F39E;
+              border-color: #DEE184;
+              text-align: center;
+              margin: 1.5em auto;
+              padding: 1.5em 1em;
+              -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+              -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+              box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+              -webkit-transform: rotate(2deg);
+              -moz-transform: rotate(2deg);
+              -o-transform: rotate(2deg);
+              -ms-transform: rotate(2deg);
+              transform: rotate(2deg);
+              width: 170px;
+              font-size: 15px;
+            }
+            .note:after {
+              display: block;
+              content: "";
+              position: absolute; 
+              width: 110px;
+              height: 30px;
+              top: -21px;
+              left: 30%;    
+              border: 1px solid #fff;
+              background: rgba(254, 254, 254, .6);
+              -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.1);
+              -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.1);
+              box-shadow: 0px 0 3px rgba(0,0,0,0.1);  
+            }
+            /* ㅗㅗ위 포스트잇ㅗㅗ */
+
+
+        .signboard {
+    width: 200px;
+    height: 230px;
+    position: relative;
+    animation: swinging 1.5s ease-in-out infinite alternate;
+    transform-origin: 200px 13px;
+}
+
+.sign {
+    width: 100%;
+    height: 200px;
+    background: burlywood;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+    font-size: 45px;
+    font-family: cursive;
+    color: saddlebrown;
+    text-align: center;
+    line-height: 200px;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3), 0 -2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.strings {
+    width: 70px;
+    height: 70px;
+    border: 5px solid brown;
+    position: absolute;
+    border-right: none;
+    border-bottom: none;
+    transform: rotate(45deg);
+    top: 25px;
+    left: 160px;
+}
+.pin {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.pin.top {
+	background: gray;
+	left: 187px;
+}
+
+.pin.left, .pin.right {
+    background: brown;
+    top: 50px;
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pin.left {
+    left: 140px;
+}
+.pin.right {
+    right: -55px;
+}
+
+@keyframes swinging {
+	from {
+		transform: rotate(10deg);
+	}
+
+	to {
+		transform: rotate(-10deg);
+	}
+}
+

@@ -7,243 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link href="\static\css\style.css" rel="stylesheet" type="text/css" />
 
-    <style>
-        /* 모바일에 적용될 스타일을 먼저 작성. */
-        /* 데모 특정 스타일 */
-        body {
-            background-color: white;
-            background-image: url(https://subtlepatterns.com/patterns/purty_wood.png);
-            background-position: center top;
-            background-repeat: repeat;
-            margin: 0 auto;
-            padding: 1em 0;
-        }
-
-        .grid {
-            display: grid;
-            height : 100vh;
-            grid-template-columns: 120px 1fr 120px;
-            grid-gap: 1rem;
-            /* justify-items : center; */
-            /* align-items : center; */
-        }
-
-        /* header,
-        aside,
-        article,
-        footer {
-            background: #eaeaea;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 15vh;
-        }
-
-        /* header,
-        footer,
-        aside,
-        article {
-            grid-column: 1 / 4;
-        } */
-        header{
-            grid-column : 1/4;
-            grid-row : 1;
-            justify-self : center;
-        }
-        aside{
-            grid-row : 2/3;
-        }
-        article{
-            grid-column : 2;
-            grid-row : 2/3;
-        }
-        footer{
-            grid-column:1/4;
-            grid-row : 3;
-            justify-self : center;
-        }
-
-        @media all and (min-width: 896px) {
-
-            /* 데스크탑에서 사용될 스타일을 여기에 작성. */
-            aside,
-            article {
-                grid-column: auto;
-            }
-        }
-
-        /*아래 말풍선 관련 */
-        /* .box1 {
-            width: 300px;
-            margin: 50px auto;
-            border: 4px solid #ffb549;
-            padding: 20px;
-            text-align: center;
-            font-weight: 900;
-            color: #ffb549;
-            font-family: arial;
-            position: relative;
-        }*/
-
-        .speech:before {
-            content: "";
-            width: 0px;
-            height: 0px;
-            position: absolute;
-            border-left: 10px solid #ffb549;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #ffb549;
-            border-bottom: 10px solid transparent;
-            left: 20px;
-            bottom: -23px;
-        }
-
-        .speech:after {
-            content: "";
-            width: 0px;
-            height: 0px;
-            position: absolute;
-            border-left: 10px solid #fff;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #fff;
-            border-bottom: 10px solid transparent;
-            left: 24px;
-            bottom: -13px;
-        } 
-        .speech{
-            width: 300px;
-            margin-top : 50px;
-            margin-left : 200px;
-            border: 4px solid #ffb549;
-            padding: 20px;
-            text-align: center;
-            font-weight: 900;
-            color: #ffb549;
-            font-family: arial;
-            position: relative;
-            align-self : center;
-        }
-
-        /* 위에 말풍선 관련 */
-        .signboard {
-            right : 100px;
-            width: 200px;
-            height: 230px;
-            position: relative;
-            animation: swinging 1.5s ease-in-out infinite alternate;
-            transform-origin: 200px 13px;
-        }
-
-        .sign {
-            width: 100%;
-            height: 200px;
-            background: burlywood;
-            border-radius: 15px;
-            position: absolute;
-            bottom: 0;
-            font-size: 45px;
-            color: saddlebrown;
-            text-align: center;
-            line-height: 200px;
-            text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3), 0 -2px 0 rgba(0, 0, 0, 0.7);
-        }
-
-        .strings {
-            width: 70px;
-            height: 70px;
-            border: 5px solid brown;
-            position: absolute;
-            border-right: none;
-            border-bottom: none;
-            transform: rotate(45deg);
-            top: 25px;
-            left: 160px;
-        }
-        .pin {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .pin.top {
-            background: gray;
-            left: 187px;
-        }
-
-        .pin.left, .pin.right {
-            background: #a52a2a;
-            top: 50px;
-            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .pin.left {
-            left: 140px;
-        }
-        .pin.right {
-            right: -55px;
-        }
-        .container {
-            display : flex;
-        }
-        .box1{
-            display : flex;
-            flex-direction : column;
-            flex-basis : 0;
-            flex : 4;
-        }
-        .box2{
-            margin-top : 20px;
-            flex-basis : 0;
-            flex: 1;
-            display : flex;
-            flex-direction : column;
-            justify-content : flex-start;
-        }
-        .btn{
-            display : flex;
-            justify-content : space-around;
-        }
-        .game_start{
-            width : 150px;
-            height : 80px;
-            background : white;
-            border : 4px solid #ffb549;
-            border-radius : 50px;
-            align-self : center;
-        }
-        /*.sidebar-left{
-            flex-basis : 0;
-            flex-grow : 1;
-        }
-        .sidebar-right{
-            flex-basis : 0;
-            flex-grow : 1;
-        }
-        .main {
-            flex-basis:0;
-            flex-grow : 4;
-        } */
-    @keyframes swinging {
-        from {
-            transform: rotate(10deg);
-        }
-
-        to {
-            transform: rotate(-10deg);
-        }
-    }
-    </style>
 
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.game_start').click(function(){
+            $('#game_start').click(function(){
                 location.href = '/play'
             })
         })
-
     </script>
 
 </head>
@@ -251,52 +24,56 @@
 <body>
     <div class="grid">
 
-        <header style="opacity: 0.2;">
+        <header>
             Header
         </header>
+
         <aside class="sidebar-left">
             Left Sidebar
         </aside>
-        <article class="main" style="background-color: rgba( 255, 255, 255, 0.5 );">
-            <div class="container">
-                <div class="box1">
-                    <!-- <div class="box1 sb7" style="background:white;"> -->
-                    <div class="speech" style="background:white;">    
-                        <div style="font-size: large; color: black;">
-                            <p>음식 추천해 드립니다</p>
-                            <p>저에게 물어보세요!!</p>
-                        </div>
-                        
-                    </div>
-                    <div class="btn">
-                    <img alt="요리사" style="max-width: 350px;height: auto;position: relative;"
-                        src="/static/img/chef_transparent.jpg"/>
-                    
-                        <button class="game_start">S T A R T !</button>
+        <article class="container">
+            <div class="container-1">
+                <div class="box1 sb7">
+                    <div style="font-size: large; color: black;">
+                        <p>음식 추천해 드립니다</p>
+                        <p>저에게 물어보세요!!</p>
                     </div>
                 </div>
-                    
-                <div class="box2">
-                    <div class="signboard">
-                        <div class="sign" style="
-                        margin-bottom: 0px;
-                        border-bottom-width: 10px;
-                        height: 150px;
-                        width: 230px;
-                        left: 70px;
-                        bottom: 40px;">샌드위치
-                        </div>
-                        <div class="strings"></div>
-                        <div class="pin top"></div>
-                        <div class="pin left"></div>
-                        <div class="pin right"></div>
-                    </div>
-                </div>    
+                <div class="signboard">
+                    <div class="sign" style="
+                    margin-bottom: 0px;
+                    border-bottom-width: 10px;
+                    height: 150px;
+                    width: 230px;
+                    left: 70px;
+                    bottom: 40px;
+                ">ebabro</div>
+                    <div class="strings"></div>
+                    <div class="pin top"></div>
+                    <div class="pin left"></div>
+                    <div class="pin right"></div>
+                </div>
+            </div>
+
+            <div class="container-2">
+                <img alt="요리사" style="max-width: 350px;height: auto;position: relative;"
+                    src="/static/img/cook_main.jpg">
+
+                <button class="fill" id = "game_start" style="margin-bottom: 100px; margin-left: 70px;"> <span>s t a r t ! </span></button>
+
+                <div class="post-it" style="margin-left: 100px; margin-right: 100px; margin-bottom: 100px;">
+                    <p class="note">
+                        <strong>오늘의 메뉴</strong><br>
+                        .<br>.<br>
+                        <strong style="font-size:25px;">로제 파스타</strong><br>
+                    </p>
+                </div>
             </div>
         </article>
         <aside class="sidebar-right">
             Right Sidebar
         </aside>
+
         <footer>
             Footer
         </footer>
