@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link href="\static\css\style.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#game_start').click(function(){
+                location.href = '/play'
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <div class="grid">
+
+        <header>
+            Header
+        </header>
+
+        <aside class="sidebar-left">
+            Left Sidebar
+        </aside>
+        <article class="container">
+            <div class="container-1">
+                <div class="box1 sb7">
+                    <div style="font-size: large; color: black;">
+                        <p>음식 추천해 드립니다</p>
+                        <p>저에게 물어보세요!!</p>
+                    </div>
+                </div>
+                <div class="signboard">
+                    <div class="sign" style="
+                    margin-bottom: 0px;
+                    border-bottom-width: 10px;
+                    height: 150px;
+                    width: 230px;
+                    left: 70px;
+                    bottom: 40px;
+                ">ebabro</div>
+                    <div class="strings"></div>
+                    <div class="pin top"></div>
+                    <div class="pin left"></div>
+                    <div class="pin right"></div>
+                </div>
+            </div>
+
+            <div class="container-2">
+                <img alt="요리사" style="max-width: 350px;height: auto;position: relative;"
+                    src="/static/img/cook_main.jpg">
+
+                <button class="fill" id = "game_start" style="margin-bottom: 100px; margin-left: 70px;"> <span>s t a r t ! </span></button>
+
+                <div class="post-it" style="margin-left: 100px; margin-right: 100px; margin-bottom: 100px;">
+                    <p class="note">
+                        <strong>오늘의 메뉴</strong><br>
+                        .<br>.<br>
+                        <strong style="font-size:25px;">로제 파스타</strong><br>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <aside class="sidebar-right">
+            Right Sidebar
+        </aside>
+
+        <footer>
+            Footer
+        </footer>
+    </div>
+
+</body>
+
+</html>

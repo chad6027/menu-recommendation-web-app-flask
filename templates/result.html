@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>result page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link href="..\static\css\style.css" rel="stylesheet" type="text/css" />
+    <script>
+        history.pushState(null, null, location.href);
+
+        function gohome(){
+            location.href = '/';
+        }
+
+         history.pushState(null, null, '');
+
+
+    </script>
+</head>
+<body>
+
+<div class="grid">
+
+        <header>
+            Header
+        </header>
+
+        <aside class="sidebar-left">
+            Left Sidebar
+        </aside>
+        <article class="container">
+            <div class="container-1">
+                <div class="box1 sb7">
+                    <div style="font-size: large; color: black;">
+                        <p>제가 추천드리는 음식은 </p>
+                        <p style="font-size: 25px;"> {{ dish }} </p>
+                        <p>입니다. </p>
+                    </div>
+                </div>
+                <div class="signboard">
+                    <div class="sign" style="
+                    margin-bottom: 0px;
+                    border-bottom-width: 10px;
+                    height: 150px;
+                    width: 230px;
+                    left: 70px;
+                    bottom: 40px;
+                ">ebabro</div>
+                    <div class="strings"></div>
+                    <div class="pin top"></div>
+                    <div class="pin left"></div>
+                    <div class="pin right"></div>
+                </div>
+            </div>
+
+            <div class="container-2">
+                <img alt="요리사" style="max-width: 350px;height: auto;position: relative;" src="/static/img/cook_result.jpg">
+                <button class="fill"> <span>다 시 하 기</span></button>
+
+            </div>
+        </article>
+        <aside class="sidebar-right">
+            Right Sidebar
+        </aside>
+
+        <footer>
+            Footer
+        </footer>
+    </div>
+
+<h1>오늘은 {{ dish }} 가 어떠신가요 ? </h1>
+
+{% for key, value in results.items() %}
+    <h5>{{ key }} : {{ value }}</h5>
+{% endfor %}
+
+<button onclick = "gohome()"> 처음으로 </button>
+
+</body>
+</html>
