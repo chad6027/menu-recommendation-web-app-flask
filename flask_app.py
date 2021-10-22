@@ -11,8 +11,8 @@ mysql = dict()
 app.secret_key = os.urandom(16)
 
 
-# 호찬이가 올려준 함수 임의로 사용가능하게 수정했음
-def updatePrior(prior, udo):  # bayes정리를 이용하여 사전확률을 갱신한다.
+# 호찬이가 올려준 함수 임의로 사용가능하게 수정
+def updatePrior(prior, udo):  # bayes정리를 이용하여 사전확률을 갱신
     up, down = 0, 0
     result = []  # 초기화해야 함수를 반복적으로 사용 가능
 
@@ -39,7 +39,7 @@ def get_random_key():
     return final_string
 
 
-# 각 세션의 유효시간을 5분으로 설정해준다.
+# 각 세션의 유효시간을 5분으로 설정
 @app.before_request
 def make_session_permanent():
     session.permanent = True
@@ -49,7 +49,6 @@ def make_session_permanent():
 @app.route('/')
 def hello_world():
     # main 기능 X
-    # newConnector =
     return render_template('home.html')
 
 
