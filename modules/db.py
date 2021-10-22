@@ -6,7 +6,7 @@ class Database():
         self.db = pymysql.connect(host='localhost',
                                   port=3306,
                                   user='root',
-                                  password='@dl2623879',
+                                  password='',
                                   db='project',
                                   read_timeout=120,
                                   connect_timeout=120,
